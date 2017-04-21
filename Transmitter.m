@@ -1,31 +1,36 @@
 PROBABILITY_m0 = 0.5;
 PROBABILITY_m1 = 1 - PROBABILITY_m0;
 THRESHOLD = PROBABILITY_m1 / PROBABILITY_m0; % (1-Ps)/Ps
-variance = 1;
+Variance = [1; 1; 1];
 
-count = 0;
-for time = 1:100
-    s = [];
-    trasmittedMessages = [];
-    receivedMessages = [];
-    Energy = 0.1:0.1:15;
-    randomNumber = randi([1 length(Energy)], 1, 1);
-    E = Energy(randomNumber);
-    i = randi([0 1]);
-    trasmittedMessages = [trasmittedMessages; i];
-    s = [s; Signal( i, E )];
-    noise = [GaussianRandom(sqrt(variance)); GaussianRandom(sqrt(variance)); GaussianRandom(sqrt(variance))];
-    r = s + noise;
-    for i = 1:3
-       receivedMessages(i) = ArbitaryDecision(r(i));
-    end
-    for i = 1:3
-        if (trasmittedMessages(1) == receivedMessages(i))
-            disp(['[i=' num2str(i) '] matched']);
-            count = count + 1;
-        else
-            disp(['[i=' num2str(i) '] not-matched']);
+AccuracyList = [];
+EnergyValue = 0.1:0.1:15;
+for energy = 1:length(EnergyValue)
+    count = 0;
+    for message = 1:50%0000
+        m = randi([0 1]); % 0 or 1
+        randomNumber = randi([1 length(EnergyValue)], 1, 1);
+%         E = EnergyValue(randomNumber);
+        E = EnergyValue(energy);
+        s = Signal(m, E);
+        noise = [GaussianRandom(sqrt(Variance)); GaussianRandom(sqrt(Variance)); GaussianRandom(sqrt(Variance))];
+        r = s + noise;
+        
+        m_hat = [];
+        for i = 1:3
+            m_hat(i) = ArbitaryDecision(r(i));
+            if (m == m_hat(i))
+%                 disp(['[i=' num2str(i) '] matched']);
+                count = count + 1;
+            else
+%                 disp(['[i=' num2str(i) '] not-matched']);
+            end
         end
     end
+    accuracy = (count/3) / message;
+    AccuracyList = [AccuracyList; accuracy];
+    disp(['[E=' num2str(E) '] Accuracy of Arbitary Decision = ' num2str(errorProbability * 100) '%'])
 end
-disp(['Accuracy of Arbitary Decision = ' num2str(count/3 * 100/time)])
+Error = 1 - AccuracyList;
+figure;
+plot(EnergyValue, Error);
