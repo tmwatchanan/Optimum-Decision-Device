@@ -21,4 +21,3 @@ function [ m_hat ] = OptimumDecisionRule(s, r, ratio, selector)
             disp('Invalid selector');
         end
 end
-
