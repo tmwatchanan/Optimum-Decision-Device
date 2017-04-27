@@ -1,15 +1,12 @@
+tic;
 % independent = 1; % Jointly statistically independent
 % independent = 0; % NOT Jointly statistically independent
-%% Generate messages
-% GenerateMessages;
 %%
 for independent = 1%:-1:0
     QUESTION = '';
     DECISION_MODE = 'OPTIMUM';
-    MESSAGE_COUNT = 50000;
-    QUESTION = 'b'; Questions;
-    GenerateMessages;
-    Simulate;
+    MESSAGE_COUNT = 500000;
+    QUESTION = 'c'; Questions;
 %     MESSAGE_COUNT = 500000; GenerateMessages;
 %     QUESTION = 'c'; Questions;
 %     QUESTION = 'd'; Questions;
@@ -23,3 +20,4 @@ for independent = 1%:-1:0
 %     QUESTION = 'd'; Questions;
 %     QUESTION = 'e'; Questions;
 end
+toc

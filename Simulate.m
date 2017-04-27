@@ -1,36 +1,41 @@
 AccuracyList = [];
 EnergyValue = 0.1:0.1:15;
 for energy = 1:length(EnergyValue)
-    count = 0;
-    for i = 1:MESSAGE_COUNT
-        m = Messages(i);
-        E = EnergyValue(energy);
-        s = Transmitter(m, E);
-        [r, n] = Channel(independent, s, Variance);
-        ratio = PROBABILITY_m0 / PROBABILITY_m1; % P0/P1
-        if strcmp(DECISION_MODE, 'OPTIMUM')
-            m_hat = OptimumDecisionRule(s, r, ratio, selector, Variance);
-        elseif strcmp(DECISION_MODE, 'ARBITRARY')
-            m_hat = ArbitraryDecision(r);
-        else
-            disp('[ERROR] Invalid DECISION_MODE');
-            return;
-        end
-        if (m_hat == m)
-            count = count + 1;
-        end
+    E = EnergyValue(energy);
+    s = Transmitter(Messages, E);
+%     [r, n] = Channel(independent, s, Variance, MESSAGE_COUNT); % r = received signal, n = noise
+    r = Channel(s, noise);
+%     ratio = PROBABILITY_m0 / PROBABILITY_m1; % P0/P1
+    if strcmp(DECISION_MODE, 'OPTIMUM')
+        OptimumDecisionRule;
+    elseif strcmp(DECISION_MODE, 'ARBITRARY')
+        m_hat = ArbitraryDecision(r);
+    else
+        disp('[ERROR] Invalid DECISION_MODE');
+        return;
     end
-    accuracy = count / i;
-    AccuracyList = [AccuracyList; accuracy];
-%     disp(['[E=' num2str(E) '] Accuracy of Arbitary Decision = ' num2str(accuracy * 100) '%'])
+    count = length(m_hat(m_hat ~= Messages));
+    probError = count / MESSAGE_COUNT;
+    ErrorList(energy) = probError;
+    if (E == 0.1 || E == 15)
+        figure('Name',['Question (' QUESTION ') ' independentString],'NumberTitle','off');
+        r_0 = r(find(r >= 0));
+        histogram(r_0, 'FaceColor', 'blue', 'EdgeColor', 'blue', 'EdgeAlpha',0.5);
+        hold on
+        r_1 = r(find(r < 0));
+        histogram(r_1, 'FaceColor', 'magenta',  'EdgeColor', 'magenta', 'EdgeAlpha',0.5);
+        hold on
+        h = vline(ratio(find(EnergyValue == E)),'g','Threshold');
+        title(titleString);
+        xlabel(xlabelString); % x-axis label
+        ylabel(ylabelString); % y-axis label
+    end
 end
-Error = 1 - AccuracyList;
 
 %%
 figure('Name',['Question (' QUESTION ') ' independentString],'NumberTitle','off');
-% errorInLog(errorInLog == -inf) = -10; % replaces -inf
-% errorInLog = log(Error);
-semilogy(EnergyValue, Error);
+semilogy(EnergyValue, ErrorList);
 title(titleString);
 xlabel(xlabelString); % x-axis label
 ylabel(ylabelString); % y-axis label
+% grid minor

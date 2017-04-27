@@ -41,4 +41,6 @@ titleString = [titleString, [independentString ' | Variance=' mat2str(Variance)]
 xlabelString = {'signal energy', 'E=0.1 to 15 (0.1 increment)'}; % x-axis label
 ylabelString = {'error', 'log scale'}; % y-axis label
 %%
-% Simulate;
+GenerateMessages;
+GenerateNoises;
+Simulate;
