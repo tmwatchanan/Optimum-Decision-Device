@@ -6,6 +6,7 @@ if find(QUESTION == 'b')
     Covariance = [0.3; 0.6; 0.9];
 %     MESSAGE_COUNT = 10000;
     selector = [1 0 0];
+    B_error = cell(2, 1);
 %% Question (c)
 elseif find(QUESTION == 'c')
     % Equal probabilities and variances

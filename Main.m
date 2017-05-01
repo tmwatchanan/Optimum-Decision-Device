@@ -3,10 +3,9 @@ tic;
 % independent = 0; % NOT Jointly statistically independent
 %%
 for independent = 0%:-1:0
-    QUESTION = '';
     DECISION_MODE = 'OPTIMUM';
     MESSAGE_COUNT = 500000;
-    QUESTION = 'd'; Questions;
+    QUESTION = 'b'; Questions;
 %     MESSAGE_COUNT = 500000; GenerateMessages;
 %     QUESTION = 'c'; Questions;
 %     QUESTION = 'd'; Questions;
