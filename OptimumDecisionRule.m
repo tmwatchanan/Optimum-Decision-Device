@@ -1,14 +1,13 @@
-if selector == [1 1 1]
-    ratio(energy) = -(1/2) / sqrt(E) * log(PROBABILITY_m0 / PROBABILITY_m1);
-    threshold = sum(bsxfun(@rdivide, r, Variance'), 2);
-    m_hat = threshold < ratio(energy); % less than : m_hat = 1 % more than : m_hat = 1
-elseif selector == [1 0 0] % based only on r1
-    threshold = 2 * abs(s) * sum(r(1) ./ Variance(1));
-    if (threshold >= ratio)
-        m_hat = 0;
+if independent == 1 % Jointly statistically independent
+    threshold(energy) = -(1/2) / sqrt(E) * log(PROBABILITY_m0 / PROBABILITY_m1);
+    if selector == [1 1 1]
+        ratio = sum(bsxfun(@rdivide, r, Variance'), 2);
+    elseif selector == [1 0 0] % based only on r1
+        ratio = sum(bsxfun(@rdivide, r(:, 1), Variance(1)), 2);
     else
-        m_hat = 1;
+        disp('Invalid selector');
     end
-else
-    disp('Invalid selector');
+    m_hat = ratio < threshold(energy); % less than : m_hat = 1 % more than : m_hat = 1
+elseif independent == 0 % NOT Jointly statistically independent
+    
 end

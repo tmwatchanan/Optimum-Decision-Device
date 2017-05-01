@@ -3,6 +3,7 @@ if find(QUESTION == 'b')
     PROBABILITY_m0 = 0.5; % Pm0
     PROBABILITY_m1 = 1 - PROBABILITY_m0; % Pm1
     Variance = zeros(3, 1) + 1;
+    Covariance = [0.3; 0.6; 0.9];
 %     MESSAGE_COUNT = 10000;
     selector = [1 0 0];
 %% Question (c)
@@ -11,6 +12,7 @@ elseif find(QUESTION == 'c')
     PROBABILITY_m0 = 0.5; % Pm0
     PROBABILITY_m1 = 1 - PROBABILITY_m0; % Pm1
     Variance = zeros(3, 1) + 1;
+    Covariance = [0.3; 0.6; 0.9];
 %     MESSAGE_COUNT = 500000;
     selector = [1 1 1];
 %% Question (d)
