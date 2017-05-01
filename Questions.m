@@ -35,7 +35,14 @@ elseif find(QUESTION == 'e')
     selector = [1 1 1];
 end
 %%
-titleString = ['Graph of question (' QUESTION ') ']; % title label
+titleString = 'Question (' ; % title label
+if independent == 0
+    titleString = [titleString 'g-'];
+end
+if strcmp(DECISION_MODE, 'ARBITRARY')
+    titleString = [titleString 'f-'];
+end
+titleString = [titleString num2str(QUESTION) ') '];
 if independent == 1
     independentString = 'jointly statistically independent';
 else

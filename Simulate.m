@@ -9,7 +9,7 @@ for energy = 1:length(EnergyValue)
     if strcmp(DECISION_MODE, 'OPTIMUM')
         OptimumDecisionRule;
     elseif strcmp(DECISION_MODE, 'ARBITRARY')
-        m_hat = ArbitraryDecision(r);
+        ArbitraryDecision;
     else
         disp('[ERROR] Invalid DECISION_MODE');
         return;

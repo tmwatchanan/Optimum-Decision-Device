@@ -20,15 +20,15 @@ ylabel(ylabelString);
 
 if save
     if independent == 1 % Jointly statistically independent
-        if strcmp(DECISION_MODE, 'ARBITARY')
-            SaveName = ['h-f-' num2str(QUESTION) '_error'];
-        else
+        if strcmp(DECISION_MODE, 'ARBITRARY')
+            SaveName = ['f-' num2str(QUESTION) '_error'];
+        elseif strcmp(DECISION_MODE, 'OPTIMAL')
             SaveName = [num2str(QUESTION) '_error'];
         end
     else % NOT jointly statistically independent
-        if strcmp(DECISION_MODE, 'ARBITARY')
+        if strcmp(DECISION_MODE, 'ARBITRARY')
             SaveName = ['h-f-' num2str(QUESTION) '_error'];
-        else
+        elseif strcmp(DECISION_MODE, 'OPTIMAL')
             SaveName = ['h-' num2str(QUESTION) '_error'];
         end
     end
