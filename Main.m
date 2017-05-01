@@ -2,7 +2,7 @@ tic;
 % independent = 1; % Jointly statistically independent
 % independent = 0; % NOT Jointly statistically independent
 %%
-for independent = 1%:-1:0
+for independent = 0%:-1:0
     QUESTION = '';
     DECISION_MODE = 'OPTIMUM';
     MESSAGE_COUNT = 500000;

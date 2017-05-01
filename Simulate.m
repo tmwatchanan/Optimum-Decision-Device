@@ -18,17 +18,18 @@ for energy = 1:length(EnergyValue)
     probError = count / MESSAGE_COUNT;
     ErrorList(energy) = probError;
     if (E == 0.1 || E == 7.5 || E == 15)
-        figure('Name',['Question (' QUESTION ') ' independentString],'NumberTitle','off');
         r_0 = r(r >= 0);
-        h1 = histogram(r_0, 'Normalization', 'pdf', 'EdgeAlpha', 0.5);
-        hold on
         r_1 = r(r < 0);
-        h2 = histogram(r_1, 'Normalization', 'pdf', 'EdgeAlpha', 0.5);
+%         figure('Name',['Question (' QUESTION ') ' independentString],'NumberTitle','off');
+        figure;
         hold on
-        h = vline(threshold(find(EnergyValue == E)),'black', ['Threshold=' num2str(threshold(find(EnergyValue == E)))]);
+        histogram(r_0, 'Normalization', 'pdf');%, 'EdgeAlpha', 0.5);
+        histogram(r_1, 'Normalization', 'pdf');%, 'EdgeAlpha', 0.5);
+        lineTH = vline(threshold(find(EnergyValue == E)),'black', ['Threshold=' num2str(threshold(find(EnergyValue == E)))]);
         title(['Question (' QUESTION ') ' independentString ' | E = ' num2str(E)]);
         xlabel('r'); % x-axis label
-        ylabel('freq'); % y-axis label
+        ylabel('pdf'); % y-axis label
+        hold off
     end
 end
 
