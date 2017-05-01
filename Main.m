@@ -8,7 +8,7 @@ independent = 1; % Jointly statistically independent
 % DECISION_MODE = 'OPTIMUM';
 DECISION_MODE = 'ARBITRARY';
 MESSAGE_COUNT = 500000;
-QUESTION = 'b'; % b, c, d, e
+QUESTION = 'd'; % b, c, d, e
 Questions;
 %% RUN
 GenerateMessages;

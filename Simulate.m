@@ -28,25 +28,22 @@ for energy = 1:length(EnergyValue)
             hold on
             histogram(graphSubplot, r_0, 'Normalization', 'pdf', 'EdgeAlpha', 0.5);
             histogram(graphSubplot, r_1, 'Normalization', 'pdf', 'EdgeAlpha', 0.5);
-            lineTH = vline(threshold(find(EnergyValue == E)),'green', ['Threshold=' num2str(threshold(find(EnergyValue == E)))]);
+            if strcmp(DECISION_MODE, 'OPTIMAL')
+                lineTH = vline(threshold(find(EnergyValue == E)),'green', ['Threshold=' num2str(threshold(find(EnergyValue == E)))]);
+            end
             title(['Question (' QUESTION ') ' independentString ' | E = ' num2str(E) '| Variance = ' num2str(Variance(subplotNumber))]);
             xlabel('r'); % x-axis label
             ylabel('pdf'); % y-axis label
         end
         hold off
-        if independent == 1 % Jointly statistically independent
-            if strcmp(DECISION_MODE, 'ARBITARY')
-                SaveName = ['h-f-' num2str(QUESTION) '_E=' num2str(E)];
-            else
-                SaveName = [num2str(QUESTION) '_E=' num2str(E)];
-            end
-        else % NOT jointly statistically independent
-            if strcmp(DECISION_MODE, 'ARBITARY')
-                SaveName = ['h-f-' num2str(QUESTION) '_E=' num2str(E)];
-            else
-                SaveName = ['h-' num2str(QUESTION) '_E=' num2str(E)];
-            end
+        SaveName = '';
+        if independent == 0 % NOT jointly statistically independent
+            SaveName = [SaveName 'h-'];
         end
+        if strcmp(DECISION_MODE, 'ARBITRARY')
+            SaveName = [SaveName 'f-'];
+        end
+        SaveName = [SaveName num2str(QUESTION) '_E=' num2str(E)];
         SaveFigure;
     end
 end
@@ -63,4 +60,3 @@ if QUESTION == 'b'
 else
     PlotErrorGraph;
 end
-

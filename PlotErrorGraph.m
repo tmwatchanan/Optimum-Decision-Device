@@ -19,18 +19,13 @@ xlabel(xlabelString);
 ylabel(ylabelString);
 
 if save
-    if independent == 1 % Jointly statistically independent
-        if strcmp(DECISION_MODE, 'ARBITRARY')
-            SaveName = ['f-' num2str(QUESTION) '_error'];
-        elseif strcmp(DECISION_MODE, 'OPTIMAL')
-            SaveName = [num2str(QUESTION) '_error'];
-        end
-    else % NOT jointly statistically independent
-        if strcmp(DECISION_MODE, 'ARBITRARY')
-            SaveName = ['h-f-' num2str(QUESTION) '_error'];
-        elseif strcmp(DECISION_MODE, 'OPTIMAL')
-            SaveName = ['h-' num2str(QUESTION) '_error'];
-        end
+    SaveName = '';
+    if independent == 0 % NOT jointly statistically independent
+        SaveName = [SaveName 'h-'];
     end
+    if strcmp(DECISION_MODE, 'ARBITRARY')
+        SaveName = [SaveName 'f-'];
+    end
+    SaveName = [SaveName num2str(QUESTION) '_error'];
     SaveFigure;
 end
