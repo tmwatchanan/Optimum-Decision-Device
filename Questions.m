@@ -21,6 +21,7 @@ elseif find(QUESTION == 'd')
     PROBABILITY_m0 = 1/4; % Pm0
     PROBABILITY_m1 = 1 - PROBABILITY_m0; % Pm1
     Variance = zeros(3, 1) + 1;
+    Covariance = [0.3; 0.6; 0.9];
 %     MESSAGE_COUNT = 500000;
     selector = [1 1 1];
 %% Question (e)

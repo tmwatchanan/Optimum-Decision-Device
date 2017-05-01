@@ -18,18 +18,21 @@ for energy = 1:length(EnergyValue)
     probError = count / MESSAGE_COUNT;
     ErrorList(energy) = probError;
     if (E == 0.1 || E == 7.5 || E == 15)
-        r_0 = r(r >= 0);
-        r_1 = r(r < 0);
-%         figure('Name',['Question (' QUESTION ') ' independentString],'NumberTitle','off');
-        figure;
+        figure('Name',['Question (' QUESTION ') ' independentString],'NumberTitle','off');
         hold on
-        histogram(r_0, 'Normalization', 'pdf');%, 'EdgeAlpha', 0.5);
-        histogram(r_1, 'Normalization', 'pdf');%, 'EdgeAlpha', 0.5);
-        lineTH = vline(threshold(find(EnergyValue == E)),'black', ['Threshold=' num2str(threshold(find(EnergyValue == E)))]);
-        title(['Question (' QUESTION ') ' independentString ' | E = ' num2str(E)]);
-        xlabel('r'); % x-axis label
-        ylabel('pdf'); % y-axis label
-        hold off
+        for subplotNumber = 1:3
+            rPlot = r(:, subplotNumber);
+            r_0 = rPlot(m_hat == 0);
+            r_1 = rPlot(m_hat == 1);
+            graphSubplot = subplot(3, 1, subplotNumber);
+            hold on
+            histogram(graphSubplot, r_0, 'Normalization', 'pdf');%, 'EdgeAlpha', 0.5);
+            histogram(graphSubplot, r_1, 'Normalization', 'pdf');%, 'EdgeAlpha', 0.5);
+            lineTH = vline(threshold(find(EnergyValue == E)),'black', ['Threshold=' num2str(threshold(find(EnergyValue == E)))]);
+            title(['Question (' QUESTION ') ' independentString ' | E = ' num2str(E) '| Variance = ' num2str(Variance(subplotNumber))]);
+            xlabel('r'); % x-axis label
+            ylabel('pdf'); % y-axis label
+        end
     end
 end
 
