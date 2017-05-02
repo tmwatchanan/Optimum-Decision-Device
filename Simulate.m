@@ -17,7 +17,7 @@ for energy = 1:length(EnergyValue)
     count = length(m_hat(m_hat ~= Messages));
     probError = count / MESSAGE_COUNT;
     ErrorList(energy) = probError;
-    if (QUESTION ~= 'b') && (E == 0.1 || E == 7.5 || E == 15)
+    if (QUESTION ~= 'b') && (E == 0.1 || E == 3.7 || E == 7.5 || E == 11.2 || E == 15)
         figure('Name',['Question (' QUESTION ') ' independentString],'NumberTitle','off');
         hold on
         for subplotNumber = 1:3
@@ -25,15 +25,13 @@ for energy = 1:length(EnergyValue)
             r_0 = rPlot(m_hat == 0);
             r_1 = rPlot(m_hat == 1);
             graphSubplot = subplot(3, 1, subplotNumber);
-            hold on
             histogram(graphSubplot, r_0, 'Normalization', 'pdf', 'EdgeAlpha', 0.5);
             hold on
             histogram(graphSubplot, r_1, 'Normalization', 'pdf', 'EdgeAlpha', 0.5);
-            hold on
-            if strcmp(DECISION_MODE, 'OPTIMAL')
+            if strcmp(DECISION_MODE, 'OPTIMUM')
                 lineTH = vline(threshold(find(EnergyValue == E)),'green', ['Threshold=' num2str(threshold(find(EnergyValue == E)))]);
             end
-            title(['Question (' QUESTION ') ' independentString ' | E = ' num2str(E) '| Variance = ' num2str(Variance(subplotNumber))]);
+            title(['Question (' QUESTION ') ' independentString ' | E = ' num2str(E) ' | Variance = ' num2str(Variance(subplotNumber))]);
             xlabel('r'); % x-axis label
             ylabel('pdf'); % y-axis label
         end

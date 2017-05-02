@@ -1,5 +1,5 @@
 if independent == 1 % Jointly statistically independent
-    threshold(energy) = -(1/2) / sqrt(E) * log(PROBABILITY_m0 / PROBABILITY_m1);
+    threshold(energy) = (1/2) / sqrt(E) * log(PROBABILITY_m1 / PROBABILITY_m0);
     if isequal(selector, [1 1 1])
         ratio = sum(bsxfun(@rdivide, r, Variance'), 2);
     elseif isequal(selector, [1 0 0]) % based only on r1
