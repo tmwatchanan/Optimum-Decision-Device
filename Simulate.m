@@ -3,9 +3,7 @@ EnergyValue = 0.1:0.1:15;
 for energy = 1:length(EnergyValue)
     E = EnergyValue(energy);
     s = Transmitter(Messages, E);
-%     [r, n] = Channel(independent, s, Variance, MESSAGE_COUNT); % r = received signal, n = noise
     r = Channel(s, noise);
-%     ratio = PROBABILITY_m0 / PROBABILITY_m1; % P0/P1
     if strcmp(DECISION_MODE, 'OPTIMUM')
         OptimumDecisionRule;
     elseif strcmp(DECISION_MODE, 'ARBITRARY')
@@ -17,7 +15,7 @@ for energy = 1:length(EnergyValue)
     count = length(m_hat(m_hat ~= Messages));
     probError = count / MESSAGE_COUNT;
     ErrorList(energy) = probError;
-    if (QUESTION ~= 'b') && (E == 0.1 || E == 3.7 || E == 7.5 || E == 11.2 || E == 15)
+    if (QUESTION ~= 'b' && QUESTION ~= 'g') && (E == 0.1 || E == 3.7 || E == 7.5 || E == 11.2 || E == 15)
         figure('Name',['Question (' QUESTION ') ' independentString],'NumberTitle','off');
         hold on
         for subplotNumber = 1:3
@@ -55,6 +53,15 @@ if QUESTION == 'b'
         Simulate;
     elseif isequal(selector, [1 1 1])
         B_error{2} = ErrorList;
+        PlotErrorGraph;
+    end
+elseif QUESTION == 'g'
+    if strcmp(DECISION_MODE, 'OPTIMUM')
+        G_error{1} = ErrorList;
+        DECISION_MODE = 'ARBITRARY';
+        Simulate;
+    elseif strcmp(DECISION_MODE, 'ARBITRARY')
+        G_error{2} = ErrorList;
         PlotErrorGraph;
     end
 else

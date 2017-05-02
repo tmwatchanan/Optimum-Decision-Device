@@ -7,7 +7,7 @@ if independent == 1 % Jointly statistically independent
     else
         disp('Invalid selector');
     end
-    m_hat = ratio < threshold(energy); % less than : m_hat = 1 % more than : m_hat = 1
+    m_hat = ratio < threshold(energy); % less than : m_hat = 1 % more than : m_hat = 0
 elseif independent == 0 % NOT jointly statistically independent
     threshold(energy) =  PROBABILITY_m0 / PROBABILITY_m1;
     if isequal(selector, [1 1 1])

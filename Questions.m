@@ -3,33 +3,39 @@ if find(QUESTION == 'b')
     PROBABILITY_m0 = 0.5; % Pm0
     PROBABILITY_m1 = 1 - PROBABILITY_m0; % Pm1
     Variance = zeros(3, 1) + 1;
-    Covariance = [0.3; 0.6; 0.9];
+    Covariance = rand(3, 1);
     selector = [1 0 0];
     B_error = cell(2, 1);
 %% Question (c)
 elseif find(QUESTION == 'c')
-    % Equal probabilities and variances
     PROBABILITY_m0 = 0.5; % Pm0
     PROBABILITY_m1 = 1 - PROBABILITY_m0; % Pm1
     Variance = zeros(3, 1) + 1;
-    Covariance = [0.3; 0.6; 0.9];
+    Covariance = rand(3, 1);
     selector = [1 1 1];
 %% Question (d)
 elseif find(QUESTION == 'd')
-    % Equal probabilities and variances
     PROBABILITY_m0 = 1/4; % Pm0
     PROBABILITY_m1 = 1 - PROBABILITY_m0; % Pm1
     Variance = zeros(3, 1) + 1;
-    Covariance = [0.3; 0.6; 0.9];
+    Covariance = rand(3, 1);
     selector = [1 1 1];
 %% Question (e)
 elseif find(QUESTION == 'e')
-    % Equal probabilities and variances
     PROBABILITY_m0 = 0.5; % Pm0
     PROBABILITY_m1 = 1 - PROBABILITY_m0; % Pm1
     Variance = [1; 2; 4];
-    Covariance = [0.3; 0.6; 0.9];
+    Covariance = rand(3, 1);
     selector = [1 1 1];
+%% Question (g)
+elseif find(QUESTION == 'g')
+    PROBABILITY_m0 = 0.5; % Pm0
+    PROBABILITY_m1 = 1 - PROBABILITY_m0; % Pm1
+    Variance = zeros(3, 1) + 1;
+    Covariance = rand(3, 1);
+    selector = [1 1 1];
+    DECISION_MODE = 'OPTIMUM';
+    G_error = cell(2, 1);
 end
 %%
 titleString = 'Question (' ; % title label
