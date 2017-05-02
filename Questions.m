@@ -46,6 +46,5 @@ else
     independentString = 'NOT jointly statistically independent';
 end
 titleString = [titleString, [independentString ' | Variance=' mat2str(Variance)], [' Pm0=Pm1=' num2str(PROBABILITY_m0)]];
-xlabelString = {'signal energy', 'E=0.1 to 15 (0.1 increment)'}; % x-axis label
-ylabelString = {'error', 'log scale'}; % y-axis label
-%%
+xlabelString = {'signal energy', 'E=0.1 to 15 (0.1 increment)'};
+ylabelString = {'error', 'log scale'};

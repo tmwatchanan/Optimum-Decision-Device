@@ -27,7 +27,9 @@ for energy = 1:length(EnergyValue)
             graphSubplot = subplot(3, 1, subplotNumber);
             hold on
             histogram(graphSubplot, r_0, 'Normalization', 'pdf', 'EdgeAlpha', 0.5);
+            hold on
             histogram(graphSubplot, r_1, 'Normalization', 'pdf', 'EdgeAlpha', 0.5);
+            hold on
             if strcmp(DECISION_MODE, 'OPTIMAL')
                 lineTH = vline(threshold(find(EnergyValue == E)),'green', ['Threshold=' num2str(threshold(find(EnergyValue == E)))]);
             end
