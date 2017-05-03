@@ -34,14 +34,7 @@ for energy = 1:length(EnergyValue)
             ylabel('pdf'); % y-axis label
         end
         hold off
-        SaveName = '';
-        if independent == 0 % NOT jointly statistically independent
-            SaveName = [SaveName 'h-'];
-        end
-        if strcmp(DECISION_MODE, 'ARBITRARY')
-            SaveName = [SaveName 'f-'];
-        end
-        SaveName = [SaveName num2str(QUESTION) '_E=' num2str(E)];
+        FigureAbout = ['_E=' num2str(E)];
         SaveFigure;
     end
 end

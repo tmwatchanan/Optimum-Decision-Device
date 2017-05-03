@@ -84,7 +84,7 @@ else
     hold on
 
     y=get(gca,'ylim');
-    plot([x x],y+0.15,linetype);
+%     plot([x x],y+0.15,linetype);
     h=plot([x x],y,linetype);
     if length(label)
         xx=get(gca,'xlim');

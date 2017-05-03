@@ -16,12 +16,5 @@ title(titleString);
 xlabel(xlabelString);
 ylabel(ylabelString);
 
-SaveName = '';
-if independent == 0 % NOT jointly statistically independent
-    SaveName = [SaveName 'h-'];
-end
-if strcmp(DECISION_MODE, 'ARBITRARY')
-    SaveName = [SaveName 'f-'];
-end
-SaveName = [SaveName num2str(QUESTION) '_error'];
+FigureAbout = '_error';
 SaveFigure;

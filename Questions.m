@@ -40,7 +40,7 @@ end
 %%
 titleString = 'Question (' ; % title label
 if independent == 0
-    titleString = [titleString 'g-'];
+    titleString = [titleString 'h-'];
 end
 if strcmp(DECISION_MODE, 'ARBITRARY')
     titleString = [titleString 'f-'];
